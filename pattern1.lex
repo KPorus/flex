@@ -1,0 +1,16 @@
+%{
+#include <stdio.h>
+int yywrap(void) { return 1; }  // Define yywrap to always return 1
+%}
+
+%%
+a(bc)*de|ade  { printf("Pattern Matched.\n"); }
+[a-zA-z]+ {printf("Pattern not matched.\n");}
+\n      { /* Ignore newline characters */ }
+.       { /* Ignore any other character */ }
+%%
+
+int main() {
+    yylex();
+    return 0;
+}

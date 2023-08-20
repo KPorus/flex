@@ -1,0 +1,15 @@
+%option noyywrap
+%{
+    #include <stdio.h>
+    int yywrap(void) { return 1; }  // Define yywrap to always return 1
+%}
+
+%%
+a(bc)+de     { printf("Pattern matched.\n"); }
+[a-zA-Z]+    { printf("Pattern not matched.\n"); }
+"\n"        {}
+%%
+int main() {
+    yylex();
+    return 0;
+}

@@ -1,0 +1,19 @@
+%option noyywrap
+%{
+#include <stdio.h>
+int Vcount = 0;
+int Ccount = 0;
+%}
+
+%%
+[aeiouAEIOU] { Vcount++; printf("%s is a vowel.\n", yytext); printf("Total Vowel: %d\n", Vcount); Vcount = 0;}
+[a-zA-Z]     { Ccount++; printf("%s is a consonant.\n", yytext); printf("Total Consonants: %d\n", Ccount); Ccount = 0;}
+\n           { /* Ignore newline characters */ }
+.            { /* Ignore any other character */ }
+%%
+
+int main()
+{
+    yylex();
+    return 0;
+}
